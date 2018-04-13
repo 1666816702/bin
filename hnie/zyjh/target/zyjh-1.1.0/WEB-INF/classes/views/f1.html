@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <script src="libs/jquery.min.js"></script>
+<script src="plugins/layer/layer.js"></script>
+<script src="libs/bootstrap.min.js"></script>
+<script src="libs/vue.min.js"></script>
+<script src="plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="plugins/ztree/jquery.ztree.all.min.js"></script>
+  <script type="text/javascript" src="libs/jquery.form.js"></script>
+  <script src="js/common.js"></script>
+ <form id="myform" action="" enctype="multipart/form-data" method="post">
+    <table>
+      <tr>
+        <td>请选择文件:</td>
+        <td><input type="file" id="file"  name="file"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="导入" onclick="ajaxSubmitForm()"></td>
+      </tr>
+    </table>
+  </form>
+  
+  </br> </br>  
+   <form id="myform2" action=""style="border:1px solid grey;width:auto;" method="post">  
+           文件名：<input type="text" name="name"/></br></br>  
+           文件路径：<input type="text" name="filePath"/></br></br>  
+           <input type="submit" value="确认下载" onclick="ajaxSubmit()"/>  
+   </form>  
+  
+<script type="text/javascript">
+function ajaxSubmit() {
+	debugger;
+	var option = {
+		url : baseURL + "stu/download",
+		type : 'POST',
+		dataType : 'json',
+		headers : {
+			"token": token
+		}, //添加请求头部
+		success : function(result) {
+			if (result != '') {
+				//alert(result);
+			} else {
+				//alert('文件内容格式错误');
+			}
+		},
+		error : function(data) {
+			//alert("导入失败！");
+		}
+	};
+	
+	$("#myform2").ajaxSubmit(option);
+	
+	return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+}
+
+function checkExcel() {
+		var fileName = $('#file').val();
+		if (fileName === '') {
+			alert('请选择文件');
+			return false;
+		}
+		var fileType = (fileName.substring(fileName.lastIndexOf(".") + 1,
+				fileName.length)).toLowerCase();
+		if (fileType !== 'xls' && fileType !== 'xlsx') {
+			alert('文件格式不正确，请选择excel文件！');
+			return false;
+		}
+		return true;
+	}
+
+	function ajaxSubmitForm() {
+		debugger;
+		var option = {
+			url : baseURL + "stu/batch",
+			type : 'POST',
+			dataType : 'json',
+			headers : {
+				"token": token
+			}, //添加请求头部
+			success : function(result) {
+				if (result != '') {
+					//alert(result);
+				} else {
+					//alert('文件内容格式错误');
+				}
+			},
+			error : function(data) {
+				alert("导入失败！");
+			}
+		};
+		if (checkExcel()) {
+			$("#myform").ajaxSubmit(option);
+		}
+		return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+	}
+</script>
+</body>
+</html>

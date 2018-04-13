@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hnie.zyjh.function.dao.InfStudentDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.edu.hnie.zyjh.function.entity.InfStudent">
+		<id column="s_id" property="sId" />
+		<result column="s_no" property="sNo" />
+		<result column="dept_id" property="deptId" />
+		<result column="class_id" property="classId" />
+		<result column="s_name" property="sName" />
+		<result column="sex" property="sex" />
+		<result column="nation" property="nation" />
+		<result column="local_institution" property="localInstitution" />
+		<result column="credits" property="credits" />
+		<result column="contact_tel" property="contactTel" />
+		<result column="school_year_id" property="schoolYearId" />
+		<result column="create_date" property="createDate" />
+	</resultMap>
+	<!-- 分页查询 -->
+	<!-- List<InfStudent> queryPageList(Page<InfStudent> page, Map<String, Object> map); -->
+	
+	<!-- 普通条件查询 -->
+	<!--  	List<InfStudent> queryList(Map<String, Object> map);-->
+	<select id="selectTotalCount" parameterType="java.util.Map" resultType="int">
+		select
+			count(*)
+		from inf_student
+		<where>
+			<if test="school_year_id!=null">
+				and school_year_id = #{school_year_id}
+			</if>
+			<if test="dept_id!=null">
+				and dept_id = #{dept_id}
+			</if>
+		</where>
+	</select>
+	<select id="queryCollegeCount" parameterType="java.util.Map" resultType="int">
+		select 
+			count(DISTINCT dept_id)
+		from 
+			inf_student
+		<where>
+			<if test="deptId!=null">
+				and dept_id = #{deptId}
+			</if>
+			<if test="schoolYearId!=null">
+				and school_year_id = #{schoolYearId}
+			</if>
+		</where>
+	</select>
+</mapper>

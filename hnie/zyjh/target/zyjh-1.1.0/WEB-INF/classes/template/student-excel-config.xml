@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excels>
+	<!-- excel标签参看:ExcelDefinition,Field标签参看:FieldValue -->
+	
+	<!-- 测试使用 ,学生类-->
+	<excel id="student" class="org.easy.excel.test.model.StudentModel" 
+	sheetname="测试学生列表" enableStyle="true" defaultAlign="center" sheetIndex="0">
+	    <field name="name" title="学院" uniformStyle="true"/>
+	    <field name="classId" title="专业班级" uniformStyle="true"/>   
+		<field name="name" title="姓名" uniformStyle="true"/>
+		<field name="age" title="年龄" align="center" titleFountColor="red" titleBgColor="dark_blue" isNull="false" regex="^[1-9]\d*$" regexErrMsg="必须是数字"/>
+		<field name="sNo" title="学号" titleFountColor="blue" isNull="false" />
+		<field name="createTime" columnWidth="4000" title="创建时间" pattern="yyyy-MM-dd"/>
+		<field name="status" title="状态" titleBgColor="green" format="1:正常,0:禁用,-1:无效" />
+		<!-- 创建人,可能需要查询数据库校验,这里使用自定义解析器 -->
+		<field name="createUser" title="创建人" cellValueConverter="org.easy.excel.test.converter.CreateUserCellValueConverter" otherConfig="Test动态传递的一个变量"/>
+	</excel>
+	
+</excels>
