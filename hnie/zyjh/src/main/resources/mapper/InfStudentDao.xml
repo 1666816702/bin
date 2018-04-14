@@ -49,7 +49,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="getStudentCountAtCompany" parameterMap="java.util.Map" resultMap="int">
+	<select id="getStudentCountAtCompany" parameterType="java.util.Map" resultType="int">
 		SELECT
 			 COUNT(*) 
 		FROM 

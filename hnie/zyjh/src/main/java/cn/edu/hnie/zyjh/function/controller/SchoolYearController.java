@@ -120,4 +120,14 @@ public class SchoolYearController extends ServiceImpl<InfSchoolYearDao, InfSchoo
 		InfSchoolYear year = schoolYearServiece.findWhichYear();
 		return R.ok().put("", "");
 	}*/
+	@RequestMapping("/active")
+	public R isActive(){
+		Boolean active = schoolYearServiece.isCanActive();
+		if(active){
+			return R.ok().put("active", 1);
+		}else{
+			return R.error().put("active", 0);
+		}
+		
+	}
 }

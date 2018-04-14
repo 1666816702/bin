@@ -20,4 +20,5 @@ public interface InfSchoolYearDao extends BaseMapper<InfSchoolYear>{
 	//
 	List<InfSchoolYear> queryList();
 	void updateStatus();
+	int findWantStop();
 }

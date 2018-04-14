@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.plugins.Page;
@@ -20,6 +21,7 @@ import cn.edu.hnie.zyjh.function.entity.InfCompanyEmployee;
 import cn.edu.hnie.zyjh.function.service.InfCompanyEmployeeService;
 import cn.edu.hnie.zyjh.util.PinYin4jUtils;
 
+@Service
 public class InfCompanyEmployeeServiceImpl extends ServiceImpl<InfCompanyEmployeeDao, InfCompanyEmployee> implements InfCompanyEmployeeService{
 
 	@Autowired

@@ -21,9 +21,9 @@
 
 	<select id="findList" parameterType="map" resultType="SysDict">
 		select u.* from sys_dict u
-		where del_flag = '0'
+		<!-- where del_flag = '0'
 		<if test="pId != null and pId.trim() != ''">
 			and parent_id = #{pId}
-		</if>
+		</if> -->
 	</select>
 </mapper>

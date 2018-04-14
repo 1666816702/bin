@@ -29,7 +29,7 @@
 			 school_year_id  = #{schoolYearId}
 	</select>
 	
-	<select id="getCompanyEmpCooperWithDept" parameterMap="java.util.Map" resultType="int">
+	<select id="getCompanyEmpCooperWithDept" parameterType="java.util.Map" resultType="int">
 		select
 			 COUNT(*)
 		from 

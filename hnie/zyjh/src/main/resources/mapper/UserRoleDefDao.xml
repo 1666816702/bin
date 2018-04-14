@@ -8,7 +8,7 @@
 		<result column="type" property="type" />
 		<result column="role_id" property="roleId" />
 	</resultMap>
-	<select id="findDelRole" parameterType="string" resultType="java.util.Long">
+	<select id="findDelRole" parameterType="string" resultType="java.lang.Long">
 		select 
 			role_id
 		from 

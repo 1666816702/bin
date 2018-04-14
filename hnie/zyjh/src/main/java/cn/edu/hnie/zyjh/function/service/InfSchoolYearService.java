@@ -24,4 +24,6 @@ public interface InfSchoolYearService  extends IService<InfSchoolYear>{
 	
 	Boolean save(InfSchoolYear year);
 
+	Boolean isCanActive();
+
 }

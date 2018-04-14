@@ -43,7 +43,13 @@ public class InfSchoolYearServiceImpl extends ServiceImpl<InfSchoolYearDao, InfS
 		}
 		return true;
 	}
-
+	
+	//判断是否可以激活
+	public Boolean isCanActive(){
+		int count = infSchoolYearDao.findWantStop();
+		return count==0? true:false;
+		
+	}
 	
 
 }

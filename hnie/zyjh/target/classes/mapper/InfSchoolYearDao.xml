@@ -24,12 +24,20 @@
 	</select>
 	<!--  updateStatus-->
 	<update id="updateStatus">
-		update inf_school_year set `status` = '2' where `status` = '1';
+		update inf_school_year set status = '2' where status = '1';
 	</update>
 	<insert id="insert" parameterType="cn.edu.hnie.zyjh.function.entity.InfSchoolYear">
 		insert into
- 		    inf_school_year (`start_date`, `end_date`, `status`, `create_time`, `school_year_name`) 
+ 		    inf_school_year (start_date, end_date, status,remark, create_time, school_year_name) 
 		VALUES 
-			(#{startDate}, #{endDate}, '2', ${createTime}, #{schoolYearName})
+			(#{startDate}, #{endDate}, '1','', #{createTime}, #{schoolYearName})
 	</insert>
+	<select id="findWantStop" resultType="int">
+		select 
+			count(*)
+		 from 
+		 	inf_school_year 
+		 where 
+		 	status = '2'
+	</select>
 </mapper>
