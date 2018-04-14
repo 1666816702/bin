@@ -19,5 +19,26 @@
 		<result column="ext4" property="ext4" />
 		<result column="ext5" property="ext5" />
 	</resultMap>
-
+	<!-- 查询在企业的校内导师 -->
+	<select id="searcherTeacherInCompany" parameterType="java.util.Map" resultType="int">
+		select 
+			count(*)
+		from 
+			inf_com_teacher_real
+		where 
+			company_id = #{companyId}
+		and 
+			school_year_id = #{schoolYearId};
+	</select>
+	<!-- 查询学校的导师-->
+	<select id="getTotalCount" parameterType="java.util.Map" resultType="int">
+		select 
+			count(*)
+		from 
+			inf_school_teacher 
+		where 
+			school_year_id = #{schoolYearId} 
+		and 
+			dept_id = #{deptId};
+	</select>
 </mapper>

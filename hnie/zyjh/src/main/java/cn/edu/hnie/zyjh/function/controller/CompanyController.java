@@ -39,9 +39,8 @@ public class CompanyController extends BatchBaseController {
 	@RequestMapping("/list")
 	//@RequiresPermissions("company:list")
 	public R getCompanyList(@RequestParam Map<String, Object> params) {
-		// 1.查询条件，从前端传入
+		// 1.查询条件，从前端传入  学年id
 		 Query query = new Query(params);
-
 		// 2. 分页参数，查询企业表
 		Page<InfCompany> pageUtil = new Page<InfCompany>(query.getPage(), query.getLimit());
 		
@@ -89,7 +88,7 @@ public class CompanyController extends BatchBaseController {
 	}
 
 	/**
-	 * <批量导入学生配置>
+	 * <查询企业的个数>
 	 * 
 	 * @throws Exception
 	 */
@@ -106,10 +105,11 @@ public class CompanyController extends BatchBaseController {
 		if(id!=1L){
 			params.put("deptId", id);
 		}
+		Integer count = infCompanyService.getTotalCount(params);
 		// 前端需要传入当前所处的角色的类型，需要和前端约定，比如：如果是教师，类型为1
 		
 		// 返回正确的的结果
-		return R.ok();
+		return R.ok().put("count", count);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class CompanyController extends BatchBaseController {
 	@Log("删除企业")
 	@RequestMapping("/delete")
 	@RequiresPermissions("company:delete")
-	public R deleteById(@RequestBody Long[] ids) {
+	public R deleteById(@RequestBody String[] ids) {
 
 		// 1.调用后端的修改接口，删除只修改导师的状态为无效
 		// 2.支持同时删除多个导师，由前端控制传入一个id数组
@@ -154,7 +154,7 @@ public class CompanyController extends BatchBaseController {
 	
 	@Log("查询企业的信息")
 	@RequestMapping("/find")
-	public R findById(@RequestBody Long id){
+	public R findById(@RequestBody String id){
 		
 		InfCompany company = infCompanyService.selectById(id);
 		return R.ok().put("company", company);

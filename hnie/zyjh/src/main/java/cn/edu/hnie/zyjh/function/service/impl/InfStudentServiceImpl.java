@@ -100,6 +100,10 @@ public class InfStudentServiceImpl extends ServiceImpl<InfStudentDao, InfStudent
 		int count =  infStudentDao.getTotalCount(params);
 		return count;
 	}
+	@Override
+	public int getStudentCountAtCompany(Map<String, Object> params) {
+		return infStudentDao.getStudentCountAtCompany(params);
+	}
 	
 	
 	//数据导出

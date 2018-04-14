@@ -2,7 +2,6 @@ package cn.edu.hnie.zyjh.function.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -87,7 +86,7 @@ public class SchoolYearController extends ServiceImpl<InfSchoolYearDao, InfSchoo
 	 * 保存学年信息
 	 */
 	@RequestMapping("/save")
-	public R save(String schoolYearName, Timestamp startDate, Timestamp endDate, String captcha)
+	public R save(String schoolYearName, Date startDate, Date endDate, String captcha)
 			throws IOException {
 		// 获取session中的验证码
 		String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
@@ -115,4 +114,10 @@ public class SchoolYearController extends ServiceImpl<InfSchoolYearDao, InfSchoo
 			return R.error().put("msg", "激活失败");
 		}
 	}
+	//查询现在是那个学年  返回给前端
+	
+	/*public R findWhichYear(){
+		InfSchoolYear year = schoolYearServiece.findWhichYear();
+		return R.ok().put("", "");
+	}*/
 }

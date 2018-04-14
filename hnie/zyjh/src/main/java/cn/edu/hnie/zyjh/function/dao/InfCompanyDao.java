@@ -1,6 +1,7 @@
 package cn.edu.hnie.zyjh.function.dao;
 
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -21,4 +22,8 @@ import  cn.edu.hnie.zyjh.function.entity.InfCompany;
 public interface InfCompanyDao extends BaseMapper<InfCompany> {
 
 	List<InfCompany> getCompanyList(Page<InfCompany> page, Map<String, Object> params);
+
+	void updateById(Serializable id);
+
+	Integer getTotalCount(Map<String, Object> params);
 }

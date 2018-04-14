@@ -16,5 +16,29 @@
 		<result column="ext4" property="ext4" />
 		<result column="ext5" property="ext5" />
 	</resultMap>
-
+	<!--  
+	<update id="updateByCompanyId" parameterType="string">
+		update 
+	</update>-->
+	<select id="getTotalCount" parameterType="java.util.Map" resultType="int">
+		select
+			count(*)
+		from
+			inf_company_employee
+		where 
+			 school_year_id  = #{schoolYearId}
+	</select>
+	
+	<select id="getCompanyEmpCooperWithDept" parameterMap="java.util.Map" resultType="int">
+		select
+			 COUNT(*)
+		from 
+			inf_company_employee a
+	 	WHERE 
+	 	    a.company_id 
+	 	in 
+	 		(SELECT b.company_id from inf_company b where b.dept_id = #{deptId} and b.school_year_id = #{schoolYearId})
+	 	 and 
+	 	 	a.school_year_id = #{schoolYearId};
+	</select>
 </mapper>

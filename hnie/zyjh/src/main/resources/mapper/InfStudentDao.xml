@@ -49,4 +49,18 @@
 			</if>
 		</where>
 	</select>
+	<select id="getStudentCountAtCompany" parameterMap="java.util.Map" resultMap="int">
+		SELECT
+			 COUNT(*) 
+		FROM 
+			inf_choose
+		where 
+			src_id = #{companyId}
+		and
+			 status in(1,2,4)
+	    and 
+	    	src_type in (2,3)
+		and 
+			school_year_id = #{schoolYearId}
+	</select>
 </mapper>

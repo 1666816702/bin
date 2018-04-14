@@ -123,8 +123,11 @@ public class StudentController extends BatchBaseController{
 		// 后端判断，如果部门是一级部门，则不带部门条件查询，否则都需要带部门标识
 		// 前端需要传入当前所处的角的类型，需要和前端约定，比如：如果是教师，类型为1
 		// 返回正确的的结果
-
 		Long deptId = ShiroUtils.getUser().getDeptId();
+		if(deptId==null){
+			int count = studentService.getStudentCountAtCompany(params);
+			return R.ok().put("count", count);
+		}
 		if(deptId!=1L){
 			params.put("deptId", deptId);
 		}

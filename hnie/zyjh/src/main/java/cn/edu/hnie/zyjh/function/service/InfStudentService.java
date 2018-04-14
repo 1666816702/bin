@@ -31,4 +31,6 @@ public interface InfStudentService extends IService<InfStudent>{
 	int getTotalCount(Map<String, Object> params);
 
 	int queryCollegeCount(Map<String, Object> params);
+
+	int getStudentCountAtCompany(Map<String, Object> params);
 }

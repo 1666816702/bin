@@ -34,4 +34,6 @@ public interface InfStudentDao extends BaseMapper<InfStudent>{
 	//查询卓越学生的数量
 	int getTotalCount(Map<String, Object> params);
 
+	int getStudentCountAtCompany(Map<String, Object> params);
+
 }

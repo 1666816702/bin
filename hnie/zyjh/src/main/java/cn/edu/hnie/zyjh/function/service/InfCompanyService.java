@@ -19,5 +19,7 @@ import cn.edu.hnie.zyjh.function.entity.InfCompany;
 public interface InfCompanyService extends IService<InfCompany>{
 
 	Page<InfCompany> getCompanyList(Page<InfCompany> page, Map<String, Object> params);
+
+	Integer getTotalCount(Map<String, Object> params);
 	
 }

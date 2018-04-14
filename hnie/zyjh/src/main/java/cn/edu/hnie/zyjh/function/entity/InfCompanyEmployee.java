@@ -21,8 +21,8 @@ public class InfCompanyEmployee extends Model<InfCompanyEmployee> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId("teacher_id")
-	private String teacherId;
+    @TableId("employee_id")
+	private Long employeeId;
 	@TableField("company_id")
 	private String companyId;
     /**
@@ -37,19 +37,19 @@ public class InfCompanyEmployee extends Model<InfCompanyEmployee> {
 	private String status;
 	@TableField("school_year_id")
 	private Long schoolYearId;
-	private String ext1;
+	private String name;
 	private String ext2;
 	private String ext3;
 	private String ext4;
 	private String ext5;
 
 
-	public String getTeacherId() {
-		return teacherId;
+	public Long getTeacherId() {
+		return employeeId;
 	}
 
-	public void setTeacherId(String teacherId) {
-		this.teacherId = teacherId;
+	public void setTeacherId(Long teacherId) {
+		this.employeeId = employeeId;
 	}
 
 	public String getCompanyId() {
@@ -92,12 +92,12 @@ public class InfCompanyEmployee extends Model<InfCompanyEmployee> {
 		this.schoolYearId = schoolYearId;
 	}
 
-	public String getExt1() {
-		return ext1;
+	public String getName() {
+		return name;
 	}
 
 	public void setExt1(String ext1) {
-		this.ext1 = ext1;
+		this.name = name;
 	}
 
 	public String getExt2() {
@@ -132,21 +132,20 @@ public class InfCompanyEmployee extends Model<InfCompanyEmployee> {
 		this.ext5 = ext5;
 	}
 
-	@Override
 	protected Serializable pkVal() {
-		return this.teacherId;
+		return this.employeeId;
 	}
 
 	@Override
 	public String toString() {
 		return "InfCompanyEmployee{" +
-			", teacherId=" + teacherId +
+			", employeeId=" + employeeId +
 			", companyId=" + companyId +
 			", type=" + type +
 			", profeYear=" + profeYear +
 			", status=" + status +
 			", schoolYearId=" + schoolYearId +
-			", ext1=" + ext1 +
+			", ext1=" + name +
 			", ext2=" + ext2 +
 			", ext3=" + ext3 +
 			", ext4=" + ext4 +

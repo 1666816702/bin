@@ -15,8 +15,34 @@
 		<result column="create_agree_date" property="createAgreeDate" />
 		<result column="cooperation_remark" property="cooperationRemark" />
 		<result column="dept_id" property="deptId" />
+		<result column="school_year_id" property="schoolYearId" />
 		<result column="expiry_agree_date" property="expiryAgreeDate" />
 	</resultMap>
-
+	<!-- 查询企业的总数 -->
+	<select id="getTotalCount" parameterType="java.util.Map" resultType="int">
+		select count(*) from inf_company
+		<where>
+			<if test="schoolYearId!=null">
+				and school_year_id = #{schoolYearId!=null}
+			</if>
+			<if test="deptId!=null">
+				and dept_id = #{deptId}
+			</if>
+		</where>
+	</select>
 	<!--selectById根据id查询信息  -->
+	<select id="selectById" parameterType="string">
+		select 
+			'company_id`, `name`, `company_type`, `main_business`, `contact_person`, `contact_tel`, `location`, `contact_email`, `create_agree_date`, `cooperation_remark`, `dept_id`, `expiry_agree_date`
+		from inf_company
+		where 1=1 
+			and
+				company_id = #{id}
+			and 
+				school_year_id = #{schoolYearId}
+	</select>
+	<!-- 表面删除公司的记录   其实为修改公司的记录-->
+	<update id="updateById" parameterType="string">
+		update inf_company set status = '0' where company_id = #{id}
+	</update>
 </mapper>

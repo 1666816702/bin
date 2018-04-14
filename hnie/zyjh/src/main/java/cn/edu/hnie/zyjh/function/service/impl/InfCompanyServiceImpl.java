@@ -1,6 +1,7 @@
 package cn.edu.hnie.zyjh.function.service.impl;
 
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
 import cn.edu.hnie.zyjh.function.dao.InfCompanyDao;
+import cn.edu.hnie.zyjh.function.dao.InfCompanyEmployeeDao;
 import cn.edu.hnie.zyjh.function.entity.InfCompany;
+import cn.edu.hnie.zyjh.function.entity.InfCompanyEmployee;
 import cn.edu.hnie.zyjh.function.service.InfCompanyService;
 
 @Service
@@ -20,12 +23,38 @@ public class InfCompanyServiceImpl extends ServiceImpl<InfCompanyDao, InfCompany
 	@Autowired
 	private InfCompanyDao companyDao;
 
+	@Autowired
+	private InfCompanyEmployeeDao companyEmployeeDao;
 	public Page<InfCompany> getCompanyList(Page<InfCompany> pageUtil, Map<String, Object> params) {
 	
 		List<InfCompany> list= companyDao.getCompanyList(pageUtil,params);
 		pageUtil.setRecords(list);
 		return pageUtil;
 	}
+
+	@Override
+	public boolean deleteBatchIds(List<? extends Serializable> idList) {
+		try{
+			for (Serializable id : idList) {
+				//修改公司记录为删除状态
+				companyDao.updateById(id);
+				//修改该公司的所有导师的记录为删除状态
+				companyEmployeeDao.updateByCompanyId(id);
+			}
+			
+			//TODO 有待商榷
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public Integer getTotalCount(Map<String, Object> params) {
+		Integer count = companyDao.getTotalCount(params);
+		return count;
+	}
+	
 
 	
 
