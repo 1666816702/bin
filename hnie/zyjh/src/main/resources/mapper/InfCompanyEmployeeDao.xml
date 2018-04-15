@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hnie.zyjh.function.dao.InfCompanyEmployeeDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.edu.hnie.zyjh.function.entity.InfCompanyEmployee">
+		<id column="teacher_id" property="teacherId" />
+		<result column="company_id" property="companyId" />
+		<result column="type" property="type" />
+		<result column="profe_year" property="profeYear" />
+		<result column="status" property="status" />
+		<result column="school_year_id" property="schoolYearId" />
+		<result column="ext1" property="ext1" />
+		<result column="ext2" property="ext2" />
+		<result column="ext3" property="ext3" />
+		<result column="ext4" property="ext4" />
+		<result column="ext5" property="ext5" />
+	</resultMap>
+	<!--  
+	<update id="updateByCompanyId" parameterType="string">
+		update 
+	</update>-->
+	<select id="getTotalCount" parameterType="java.util.Map" resultType="int">
+		select
+			count(*)
+		from
+			inf_company_employee
+		where 
+			 school_year_id  = #{schoolYearId}
+	</select>
+	
+	<select id="getCompanyEmpCooperWithDept" parameterType="java.util.Map" resultType="int">
+		select
+			 COUNT(*)
+		from 
+			inf_company_employee a
+	 	WHERE 
+	 	    a.company_id 
+	 	in 
+	 		(SELECT b.company_id from inf_company b where b.dept_id = #{deptId} and b.school_year_id = #{schoolYearId})
+	 	 and 
+	 	 	a.school_year_id = #{schoolYearId};
+	</select>
+</mapper>

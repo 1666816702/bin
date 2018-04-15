@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.hnie.system.dao.SysDictDao">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.edu.hnie.system.entity.SysDict">
+		<id column="id" property="id" />
+		<result column="parent_id" property="parentId" />
+		<result column="sort" property="sort" />
+		<result column="create_by" property="createBy" />
+		<result column="del_flag" property="delFlag" />
+		<result column="description" property="description" />
+		<result column="label" property="label" />
+		<result column="remarks" property="remarks" />
+		<result column="type" property="type" />
+		<result column="update_by" property="updateBy" />
+		<result column="value" property="value" />
+		<result column="create_date" property="createDate" />
+		<result column="update_date" property="updateDate" />
+	</resultMap>
+
+	<select id="findList" parameterType="map" resultType="SysDict">
+		select u.* from sys_dict u
+		<!-- where del_flag = '0'
+		<if test="pId != null and pId.trim() != ''">
+			and parent_id = #{pId}
+		</if> -->
+	</select>
+</mapper>
