@@ -6,18 +6,13 @@ $(function () {
         },
         datatype: "json",
         colModel: [			
-			{ label: '企业ID', name: 'companyId', index: "company_id", width: 45, key: true },
-			{ label: '企业名称', name: 'name', width: 75 },
-            { label: '企业性质', name: 'companyType', width: 75 },
-			{ label: '主营业务', name: 'mainBusiness', width: 90 },
-			{ label: '签订时间', name: 'contactPerson', width: 80 },
-			/*{ label: '状态', name: 'status', width: 80, formatter: function(value, options, row){
-				return value === 0 ? 
-					'<span class="label label-danger">禁用</span>' : 
-					'<span class="label label-success">正常</span>';
-			}},*/
-			{ label: '协议学院', name: 'contactPerson', width: 80 },
-			{ label: '企业负责人', name: 'contactTel', index: "create_time", width: 90},
+			{ label: '企业ID', name: 'companyId', classes: 'form_style', index: "company_id", width: 45, key: true },
+			{ label: '企业名称', name: 'name', classes: 'form_style', width: 75 },
+            { label: '企业性质', name: 'companyType', classes: 'form_style', width: 75 },
+			{ label: '主营业务', name: 'mainBusiness', classes: 'form_style', width: 90 },
+			{ label: '签订时间', name: 'contactPerson', classes: 'form_style', width: 80 },
+			{ label: '协议学院', name: 'contactPerson', classes: 'form_style', width: 80 },
+			{ label: '企业负责人', name: 'contactTel', classes: 'form_style', index: "create_time", width: 90},
 			{ label: '操作', name: 'operation', width: 90,  formatter: function(value, row) {
 				return '<span class="edit_btn">编辑</span><span class="delete_btn">删除</span>';
 			}}

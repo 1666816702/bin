@@ -6,3 +6,8 @@
 	text-align:center;
 	line-height:36px;
 }
+.form_style{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
