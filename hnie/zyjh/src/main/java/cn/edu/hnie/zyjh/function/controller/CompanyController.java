@@ -1,6 +1,8 @@
 package cn.edu.hnie.zyjh.function.controller;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.baomidou.mybatisplus.plugins.Page;
 
 import cn.edu.hnie.common.annotation.Log;
+import cn.edu.hnie.common.excel.imports.result.ExcelImportResult;
 import cn.edu.hnie.common.utils.Query;
 import cn.edu.hnie.common.utils.R;
 import cn.edu.hnie.common.utils.ShiroUtils;
@@ -67,8 +70,11 @@ public class CompanyController extends BatchBaseController {
 		// 1 调用基类的上传方法，把上传的excel转换成指定模版的对象
 		// 1.1 获取经过转换的对象，catch下，看是否有异常，有异常的话转换成消息，返回到前端
 		// 1.2 第二个参数是excel模版文件的路径，第三个文件模版中的Id,因为一个模版中可以映射成多个excel
-		super.fileUpload(request, "company");
+		ExcelImportResult result = super.fileUpload(request, "company");
+		//获取企业信息
+		List<InfCompany> listBean = result.getListBean();
 
+		infCompanyService.addCompanyBatch(listBean);
 		// 2. 调用service层新增接口(批量接口，需要重新定义)
 		// 批量导入企业信息，需要增加企业管理人员的用户和相关权限
 		// 一个企业只能有一个企业管理人员
@@ -120,15 +126,22 @@ public class CompanyController extends BatchBaseController {
 	@Log("保存企业配置")
 	@RequestMapping("/save")
 	@RequiresPermissions("company:save")
-	public R save(@RequestBody SysConfig systemConfig) {
+	public R save(@RequestBody InfCompany company) {
 		// 1.判断主键是否存在，存在就是修改，否则就是新增
-		// 1.1 新增企业信息，需要增加企业管理人员的用户和相关权限。新增的时候要把公司的id作为用户的部门标识存起来
-		// 1.2 修改企业信息，如果没有修改企业管理人员的名字，只是修改了email或者电话号码，则认为是同一个人，不重新配置权限
-		// 1.3 TODO:重新配置权限，需要先把老的权限删除，在新增新的权限
-		// 1.4 根据公司的主键找到原来老的权限
-
-		// 一个企业只能有一个企业管理人员
-
+		String id = company.getCompanyId();
+		if(id==null){
+			//保存企业
+			// 1.1 新增企业信息，需要增加企业管理人员的用户和相关权限。新增的时候要把公司的id作为用户的部门标识存起来
+			infCompanyService.addCompany(company);
+		}else{
+			// 1.2 修改企业信息，如果没有修改企业管理人员的名字，只是修改了email或者电话号码，则认为是同一个人，不重新配置权限
+			infCompanyService.updateCompanyInfo(company);
+			// 1.3 TODO:重新配置权限，需要先把老的权限删除，在新增新的权限
+			// 1.4 根据公司的主键找到原来老的权限
+			// 一个企业只能有一个企业管理人
+		}
+	
+		
 		// 2. 调用service层的修改或者新增接口
 
 		// 返回正确的的结果
@@ -159,5 +172,19 @@ public class CompanyController extends BatchBaseController {
 		InfCompany company = infCompanyService.selectById(id);
 		return R.ok().put("company", company);
 		
+	}
+	
+	/**
+	 * 企业选择学生
+	 */
+	@RequestMapping("/choose")
+	@RequiresPermissions("company:choose")
+	public R choose(@RequestBody List<SysConfig> chooseList, @RequestBody BigDecimal schoolYearId) {
+		// 对于同一个专业，最多选择8个，由前端控制
+		// 调用后端的双选接口，把数据入库
+		// 需要初始化src_type = '2', status='0',创建时间
+		// 前端传src_id，company_name, student_name, dept_id, dest_id
+		
+		return R.ok();
 	}
 }

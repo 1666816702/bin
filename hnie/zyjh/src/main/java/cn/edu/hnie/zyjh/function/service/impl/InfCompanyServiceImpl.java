@@ -14,7 +14,6 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import cn.edu.hnie.zyjh.function.dao.InfCompanyDao;
 import cn.edu.hnie.zyjh.function.dao.InfCompanyEmployeeDao;
 import cn.edu.hnie.zyjh.function.entity.InfCompany;
-import cn.edu.hnie.zyjh.function.entity.InfCompanyEmployee;
 import cn.edu.hnie.zyjh.function.service.InfCompanyService;
 
 @Service
@@ -53,6 +52,24 @@ public class InfCompanyServiceImpl extends ServiceImpl<InfCompanyDao, InfCompany
 	public Integer getTotalCount(Map<String, Object> params) {
 		Integer count = companyDao.getTotalCount(params);
 		return count;
+	}
+
+	@Override
+	public void addCompanyBatch(List<InfCompany> listBean) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addCompany(InfCompany company) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCompanyInfo(InfCompany company) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

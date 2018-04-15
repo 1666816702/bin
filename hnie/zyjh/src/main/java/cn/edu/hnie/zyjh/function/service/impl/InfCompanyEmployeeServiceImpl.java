@@ -1,6 +1,5 @@
 package cn.edu.hnie.zyjh.function.service.impl;
 
-import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,11 +14,11 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
 import cn.edu.hnie.system.dao.SysUserDao;
 import cn.edu.hnie.system.entity.SysUser;
+import cn.edu.hnie.util.PinYin4jUtils;
 import cn.edu.hnie.zyjh.function.dao.InfCompanyEmployeeDao;
 import cn.edu.hnie.zyjh.function.dao.UserRoleDefDao;
 import cn.edu.hnie.zyjh.function.entity.InfCompanyEmployee;
 import cn.edu.hnie.zyjh.function.service.InfCompanyEmployeeService;
-import cn.edu.hnie.zyjh.util.PinYin4jUtils;
 
 @Service
 public class InfCompanyEmployeeServiceImpl extends ServiceImpl<InfCompanyEmployeeDao, InfCompanyEmployee> implements InfCompanyEmployeeService{

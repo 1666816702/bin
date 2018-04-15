@@ -45,4 +45,27 @@
 	<update id="updateById" parameterType="string">
 		update inf_company set status = '0' where company_id = #{id}
 	</update>
+	<select id="getCompanyList" resultType="cn.edu.hnie.zyjh.function.entity.InfCompany">
+		select
+		 	 c.company_id,c.name,c.company_type,c.main_business,c.create_agree_date,
+		 	 (select d.name from sys_dept d where d.dept_id = c.dept_id) deptName,
+		 	 c.contact_person 
+		from 
+			inf_company c 
+		<where>
+			<if test="schoolYearId!=null">
+				 c.school_year_id = #{schoolYearId}
+			</if>
+			<!--  数据过滤  -->
+			${filterSql}
+		</where>
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by c.${sidx} ${order}
+			</when>
+			<otherwise>
+				order by c.company_id desc
+			</otherwise>
+		</choose>
+	</select>
 </mapper>

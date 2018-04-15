@@ -18,7 +18,6 @@ import  cn.edu.hnie.zyjh.function.entity.InfCompany;
  * @author ${author}
  * @since 2018-04-05
  */
-
 public interface InfCompanyDao extends BaseMapper<InfCompany> {
 
 	List<InfCompany> getCompanyList(Page<InfCompany> page, Map<String, Object> params);

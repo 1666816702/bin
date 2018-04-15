@@ -2,6 +2,7 @@ package cn.edu.hnie.zyjh.base;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -85,12 +86,9 @@ public class BatchBaseController extends BaseController {
 			// 读入到输入流里面
 			in.read(body);
 
-			// 防止中文乱码
-			String realFileName = new String(excelId.getBytes("gbk"), "iso8859-1");
-
 			// 设置响应头
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-Disposition", "attachment;filename=" + realFileName);
+			headers.add("Content-Disposition", "attachment;filename="+ URLEncoder.encode("template.xls", "UTF-8"));
 
 			// 设置响应码，消息体，响应头
 			return new ResponseEntity<byte[]>(body, headers, HttpStatus.OK);

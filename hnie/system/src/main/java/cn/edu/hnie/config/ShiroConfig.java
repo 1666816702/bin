@@ -67,6 +67,7 @@ public class ShiroConfig {
 		filterMap.put("/**/*.js", "anon");
 		filterMap.put("/**/*.html", "anon");
 		filterMap.put("/img/**", "anon");
+		filterMap.put("/images/**", "anon");
 		filterMap.put("/fonts/**", "anon");
 		filterMap.put("/plugins/**", "anon");
 		filterMap.put("/swagger/**", "anon");

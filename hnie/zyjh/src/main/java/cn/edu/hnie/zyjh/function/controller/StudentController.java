@@ -1,5 +1,6 @@
 package cn.edu.hnie.zyjh.function.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import cn.edu.hnie.common.excel.imports.result.ExcelImportResult;
 import cn.edu.hnie.common.utils.Query;
 import cn.edu.hnie.common.utils.R;
 import cn.edu.hnie.common.utils.ShiroUtils;
+import cn.edu.hnie.system.entity.SysConfig;
 import cn.edu.hnie.zyjh.base.BatchBaseController;
 import cn.edu.hnie.zyjh.function.entity.InfStudent;
 import cn.edu.hnie.zyjh.function.service.InfStudentService;
@@ -168,6 +170,20 @@ public class StudentController extends BatchBaseController{
 		// 1.1 删除学生，需要删除权限(用户和角色都需要删除)
 		 studentService.deleteUserAndUser();
 		// 返回正确的的结果
+		return R.ok();
+	}
+	
+	/**
+	 * 学生选择企业
+	 */
+	@RequestMapping("/choose")
+	@RequiresPermissions("student:choose")
+	public R choose(@RequestBody List<SysConfig> chooseList, @RequestBody BigDecimal schoolYearId) {
+		// 对于学生，最多选择3个企业，由前端控制
+		// 调用后端的双选接口，把数据入库
+		// 需要初始化src_type = '1', status='0',创建时间
+		// 前端传src_id，company_name, student_name, dept_id, dest_id
+		
 		return R.ok();
 	}
 }

@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.ls.LSException;
 
 import com.baomidou.mybatisplus.plugins.Page;
 
@@ -20,7 +21,6 @@ import cn.edu.hnie.common.excel.imports.result.ExcelImportResult;
 import cn.edu.hnie.common.utils.Query;
 import cn.edu.hnie.common.utils.R;
 import cn.edu.hnie.common.utils.ShiroUtils;
-import cn.edu.hnie.system.entity.SysConfig;
 import cn.edu.hnie.zyjh.base.BatchBaseController;
 import cn.edu.hnie.zyjh.function.entity.InfCompanyEmployee;
 import cn.edu.hnie.zyjh.function.service.InfCompanyEmployeeService;
@@ -80,6 +80,30 @@ public class CompanyEmployeeController extends BatchBaseController {
 		// 注意type=1
 
 		// 返回正确的的结果
+		return R.ok();
+	}
+	
+	/**
+	 * <下载批量导入企业信息的excel模版>
+	 * 
+	 * @throws Exception
+	 */
+	@RequestMapping("/download")
+	public ResponseEntity<byte[]> download(HttpServletRequest request) throws Exception {
+		return super.downLoad(request, "employee");
+	}
+	
+	/**
+	 * <校验导入的excel是否与模版匹配>
+	 * 只校验表头，不校验内容
+	 * 
+	 * @throws Exception
+	 * 
+	 */
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public R check(HttpServletRequest request) throws Exception {
+
+		super.check(request, "employee");
 		return R.ok();
 	}
 

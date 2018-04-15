@@ -1,5 +1,6 @@
 package cn.edu.hnie.zyjh.function.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +22,7 @@ import cn.edu.hnie.common.excel.imports.result.ExcelImportResult;
 import cn.edu.hnie.common.utils.Query;
 import cn.edu.hnie.common.utils.R;
 import cn.edu.hnie.common.utils.ShiroUtils;
+import cn.edu.hnie.system.entity.SysConfig;
 import cn.edu.hnie.zyjh.base.BatchBaseController;
 import cn.edu.hnie.zyjh.function.entity.InfSchoolTeacher;
 import cn.edu.hnie.zyjh.function.service.InfSchoolTeacherService;
@@ -146,6 +150,30 @@ public class SchoolTeacherController extends BatchBaseController{
 	}
 	
 	/**
+	 * <下载批量导入校内导师信息的excel模版>
+	 * 
+	 * @throws Exception
+	 */
+	@RequestMapping("/download")
+	public ResponseEntity<byte[]> download(HttpServletRequest request) throws Exception {
+		return super.downLoad(request, "teacher");
+	}
+	
+	/**
+	 * <校验导入的excel是否与模版匹配>
+	 * 只校验表头，不校验内容
+	 * 
+	 * @throws Exception
+	 * 
+	 */
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public R check(HttpServletRequest request) throws Exception {
+
+		super.check(request, "teacher");
+		return R.ok();
+	}
+	
+	/**
 	 * <删除校内导师>
 	 * 
 	 */
@@ -165,5 +193,24 @@ public class SchoolTeacherController extends BatchBaseController{
 	public R findTeacherById(@RequestParam Map<String,Object> param){
 		InfSchoolTeacher teacher = schoolTeacherService.findTeacherById(param);
 		return R.ok().put("teacher",teacher);
+	}
+	
+	/**
+	 * 学院管理人员指定双选
+	 */
+	@RequestMapping("/specify")
+	@RequiresPermissions("school:teacher:specify")
+	public R specify(@RequestBody List<SysConfig> chooseList, @RequestBody BigDecimal schoolYearId) {
+		// 调用后端的双选接口，把数据入库
+		// 如果前端无法给出这么多数据，去数据库中查询一次，最好不要，影响效率，注意dept_id是学生的学院
+		// 1.学生的双选信息入库
+		// 需要初始化src_type = '1', status='4',创建时间
+		// 前端传src_id，company_name, student_name, dept_id, dest_id
+		
+		// 2.企业的双选信息入库
+		// 需要初始化src_type = '2', status='4',创建时间
+		// 前端传src_id，company_name, student_name, dept_id, dest_id
+		
+		return R.ok();
 	}
 }
