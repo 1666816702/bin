@@ -100,19 +100,19 @@ body{
 	float:left;
 	width:62px;
 	height:64px;
-	background:url(../../img/school/enterprise_icon_03.png) no-repeat ;
+	background:url(../../img/enterprise_icon_03.png) no-repeat ;
 }
 .system_message_icon2{
-	background:url(../../img/school/teacher_icon_03.png) no-repeat;
+	background:url(../../img/teacher_icon_03.png) no-repeat;
 }
 .system_message_iconPro{
-	background:url(../../img/school/profession_icon_03.png) no-repeat;
+	background:url(../../img/profession_icon_03.png) no-repeat;
 }
 .system_message_iconStu{
-	background:url(../../img/school/profession_icon_03.png) no-repeat;
+	background:url(../../img/profession_icon_03.png) no-repeat;
 }
 .system_message_icontea{
-	background:url(../../img/school/student_icon_03.png) no-repeat;
+	background:url(../../img/student_icon_03.png) no-repeat;
 }
 .system_message_write{
 	float:left;
