@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: zyjh
 Implementation-Version: 1.1.0
-Built-By: HPQ
+Built-By: dell
 Implementation-Vendor-Id: cn.hnie
 Build-Jdk: 1.8.0_101
 Implementation-URL: http://projects.spring.io/spring-boot/hnie-parent/
