@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: zyjh
+Implementation-Version: 1.1.0
+Built-By: HPQ
+Implementation-Vendor-Id: cn.hnie
+Build-Jdk: 1.8.0_101
+Implementation-URL: http://projects.spring.io/spring-boot/hnie-parent/
+ zyjh/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

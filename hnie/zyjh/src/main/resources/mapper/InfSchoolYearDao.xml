@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hnie.zyjh.function.dao.InfSchoolYearDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.edu.hnie.zyjh.function.entity.InfSchoolYear">
+		<id column="school_year_id" property="schoolYearId" />
+		<result column="start_date" property="startDate" />
+		<result column="end_date" property="endDate" />
+		<result column="status" property="status" />
+		<result column="remark" property="remark" />
+		<result column="create_time" property="createTime" />
+		<result column="school_year_name" property="schoolYearName" />
+	</resultMap>
+	<select id="queryList" resultMap="BaseResultMap">
+		SELECT 
+			school_year_id, start_date,end_date,remark,remark,create_time,school_year_name
+		from 
+			inf_school_year 
+		ORDER BY 
+		 	create_time desc
+		 LIMIT 
+		 	0,5
+	</select>
+	<!--  updateStatus-->
+	<update id="updateStatus">
+		update inf_school_year set status = '2' where status = '1';
+	</update>
+	<insert id="insert" parameterType="cn.edu.hnie.zyjh.function.entity.InfSchoolYear">
+		insert into
+ 		    inf_school_year (start_date, end_date, status,remark, create_time, school_year_name) 
+		VALUES 
+			(#{startDate}, #{endDate}, '1','', #{createTime}, #{schoolYearName})
+	</insert>
+	<select id="findWantStop" resultType="int">
+		select 
+			count(*)
+		 from 
+		 	inf_school_year 
+		 where 
+		 	status = '2'
+	</select>
+</mapper>
